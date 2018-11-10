@@ -7,7 +7,6 @@ class Demo extends Component {
   render() {
     return (
       <div>
-        <h1>artispace Demo</h1>
         <Button />
       </div>
     );
