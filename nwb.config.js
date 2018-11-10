@@ -3,7 +3,7 @@ module.exports = {
   npm: {
     esModules: true,
     umd: {
-      global: 'Artispace',
+      global: 'ArtispaceCore',
       externals: {
         react: 'React'
       }

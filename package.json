@@ -1,7 +1,7 @@
 {
-  "name": "artispace",
+  "name": "@artispace/core",
   "version": "1.0.0",
-  "description": "artispace React component",
+  "description": "artispace Core React components",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
