@@ -2338,7 +2338,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-crocks@^0.11.1:
+crocks@0.11.x:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/crocks/-/crocks-0.11.1.tgz#58a59e0a565258ece048540f6f287525e129f08c"
   integrity sha512-MSaMHvzKugK4iX97VzUty+bdhDN+3MVfGrllye/P7qKGeHnRU7/ich+j0YzIN3SP4cEIFnQplTuAat0c1pLiCg==
