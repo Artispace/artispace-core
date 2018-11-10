@@ -44,5 +44,10 @@
   "repository": "",
   "keywords": [
     "react-component"
-  ]
+  ],
+  "babel": {
+    "presets": [
+      "flow"
+    ]
+  }
 }
