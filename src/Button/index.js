@@ -1,10 +1,12 @@
+// @flow
+
 import React, { Component } from "react";
 
-export default class extends Component {
+export default class extends Component<{}, {}> {
   render() {
     return (
       <div>
-        <button>Hi there</button>
+        <button>Hi Mate Sir Hows the going</button>
       </div>
     );
   }
