@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@artispace/utils@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@artispace/utils/-/utils-1.0.0.tgz#07f32dc7ac1842308254ff114ee255a4f36dff41"
+  integrity sha512-ig9+8Le0qb+QwpcD+5SrRkfRn2qh3Jncs/XmQBcC4GeCiNQmjaAWs+BQ/i68e6QTNCEmNeWrvFNwETrIMNb9NA==
+
 "@babel/runtime@7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.0.0.tgz#adeb78fedfc855aa05bc041640f3f6f98e85424c"

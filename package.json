@@ -21,13 +21,15 @@
   },
   "dependencies": {},
   "peerDependencies": {
+    "@artispace/utils": "1.x",
     "@material-ui/core": "^3.2.0",
     "@material-ui/icons": "^3.0.1",
+    "crocks": "0.11.x",
     "react": "16.x",
-    "webfontloader": "1.6.x",
-    "crocks": "0.11.x"
+    "webfontloader": "1.6.x"
   },
   "devDependencies": {
+    "@artispace/utils": "^1.0.0",
     "@material-ui/core": "^3.4.0",
     "@material-ui/icons": "^3.0.1",
     "babel-cli": "^6.26.0",
