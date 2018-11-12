@@ -12,6 +12,8 @@ import shouldUpdate from "recompose/shouldUpdate";
 
 import propPath from "crocks/Maybe/propPath";
 
+import type { HOC } from "recompose";
+
 // utils
 import {
   getString,
@@ -188,7 +190,7 @@ function CenteredCard(props: Props) {
   );
 }
 
-const optimize = compose(
+const optimize: HOC<*, boolean> = compose(
   shouldUpdate(
     (prev, next) =>
       prev.avatar !== next.avatar ||
