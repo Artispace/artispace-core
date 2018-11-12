@@ -25,8 +25,6 @@ import {
 } from "@artispace/utils/lib/ADTS/state";
 import { doesPropExist } from "@artispace/utils/lib/ADTS/pred";
 
-import renderIcon from "../Rendericon/Rendericon";
-
 const Genericcomponent = componentFromProp("component");
 const Genericicon = componentFromProp("component");
 
@@ -177,7 +175,11 @@ class CustomizedTabs extends React.Component<Props, State> {
     // safe components
     const safeComponents: Array<any> = getArrayC("components", [])(this.props);
 
-    const safeRenderFn: any => mixed = getFunctionC("renderFunction", () => {})(
+    const safeRenderComponent: any => mixed = getFunctionC(
+      "renderFunction",
+      () => {}
+    )(this.props);
+    const safeRenderIcon: any => mixed = getFunctionC("renderIcon", () => {})(
       this.props
     );
 
@@ -201,7 +203,7 @@ class CustomizedTabs extends React.Component<Props, State> {
               )
                 .map(c =>
                   Boolean(c) ? (
-                    <Genericicon component={renderIcon(c.icon)} />
+                    <Genericicon component={safeRenderIcon(c.icon)} />
                   ) : null
                 )
                 .evalWith(tab);
@@ -227,7 +229,7 @@ class CustomizedTabs extends React.Component<Props, State> {
                 key={i}
                 {...comp}
                 gridIndex={i}
-                component={safeRenderFn(comp.component)}
+                component={safeRenderComponent(comp.component)}
               />
             ))}
         </div>

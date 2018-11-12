@@ -14,9 +14,3 @@ export Swipeablestepper from "./Swipeablestepper";
 export Tabs from "./Tabs";
 export Theme from "./Theme";
 export Typography from "./Typography";
-
-// utils
-export formatwidth, {
-  resolveIconSvgImage,
-  getfileextensionfromname
-} from "./utils";
