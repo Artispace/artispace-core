@@ -31,35 +31,33 @@ const styles = (theme: Object) => ({
   }
 });
 
-const Carouselcontrols = optimize(
-  ({
-    classes,
-    itemsnumber,
-    index,
-    handleChangeIndex
-  }: {
-    classes: Object,
-    itemsnumber: number,
-    index: number,
-    handleChangeIndex: number => void
-  }) => {
-    const indexChange = index => handleChangeIndex(index);
-    return (
-      <div className={classes.root}>
-        {[...Array(itemsnumber).keys()].map((item, i) => (
-          <Paper
-            className={classNames({
-              [classes.item]: true,
-              [classes.active]: i === index
-            })}
-            key={i}
-            elevation={12}
-            onClick={indexChange(i)}
-          />
-        ))}
-      </div>
-    );
-  }
-);
+const Carouselcontrols = ({
+  classes,
+  itemsnumber,
+  index,
+  handleChangeIndex
+}: {
+  classes: Object,
+  itemsnumber: number,
+  index: number,
+  handleChangeIndex: number => void
+}) => {
+  const indexChange = index => () => handleChangeIndex(index);
+  return (
+    <div className={classes.root}>
+      {[...Array(itemsnumber).keys()].map((item, i) => (
+        <Paper
+          className={classNames({
+            [classes.item]: true,
+            [classes.active]: i === index
+          })}
+          key={i}
+          elevation={12}
+          onClick={indexChange(i)}
+        />
+      ))}
+    </div>
+  );
+};
 
 export default withStyles(styles)(Carouselcontrols);

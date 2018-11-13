@@ -63,7 +63,7 @@ const Avatarcomponent = (props: Props) => {
 
 const Avatarcomponentwiththeme = withTheme()(Avatarcomponent);
 
-const optimize: HOC<*, boolean> = compose(
+const optimize = compose(
   shouldUpdate(
     (prev, next) =>
       prev.alt !== next.alt ||

@@ -118,7 +118,7 @@ function CenteredCard(props: Props) {
   // const safeBackground = safe(isString, background).option("");
   const safeBackground: string = getStringC("background", "")(props);
   // const titleContent = safe(isString, title);
-  const titleContent: Object = getStringC("title", null);
+  const titleContent: Object = getString("title", null);
   const safeTitle = titleContent
     .map(title =>
       Boolean(title) ? (
@@ -137,7 +137,7 @@ function CenteredCard(props: Props) {
     )
     .evalWith(props);
 
-  const safeAvatar: Optionalcomponent = getString("avatar", null)
+  const safeAvatar: Optionalcomponent = getObject("avatar", null)
     .map(avatar =>
       Boolean(avatar) ? (
         <Avatar

@@ -58,15 +58,14 @@ const Griditem = (props: Itemprops) => {
       return {
         title: getStringC("title", "Title")(more),
         subtitle: getStringC("subtitle", "Subtitle")(more),
-        position: getStringC("position", "top")(props)
+        position: getStringC("position", "top")(more)
       };
     })
     .evalWith(props);
-  const safeHeight: number = getObject("height", 300)
-    .map(height => {
-      return propPath(["height", formatWidth(width)], props).option(200);
-    })
-    .evalWith(props);
+  const safeHeight: number = propPath(
+    ["height", formatWidth(width)],
+    props
+  ).option(200);
 
   const safeImage = getStringC(
     "image",

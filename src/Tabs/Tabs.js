@@ -23,7 +23,7 @@ import {
   getBooleanC,
   getNonEmptyString
 } from "@artispace/utils/lib/ADTS/state";
-import { doesPropExist } from "@artispace/utils/lib/ADTS/pred";
+import { isPropTrueC } from "@artispace/utils/lib/ADTS/pred";
 
 const Genericcomponent = componentFromProp("component");
 const Genericicon = componentFromProp("component");
@@ -146,9 +146,9 @@ class CustomizedTabs extends React.Component<Props, State> {
       else return false;
     };
 
-    const safeSecondaryProp: string = doesPropExist("secondary", false)
-      .map(val => (Boolean(val) ? "secondary" : "primary"))
-      .runWith(this.props);
+    const safeSecondaryProp: string = isPropTrueC(this.props.secondary)
+      ? "secondary"
+      : "primary";
     // safeTabs props;
     const safeTabs: Array<Tabprop> = getArrayC("tabs", [{ label: "First" }])(
       this.props

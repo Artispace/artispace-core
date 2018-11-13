@@ -71,10 +71,14 @@ class Carousell extends React.Component<Props, State> {
         <div
           style={{
             position: "relative",
-            top: -80
+            top: safeImages.length > 0 ? -80 : 0
           }}
         >
-          <Typography variant="overline" content={safeCaption} />
+          <Typography
+            variant="overline"
+            content={safeCaption}
+            color="inherit"
+          />
         </div>
       </Paper>
     );

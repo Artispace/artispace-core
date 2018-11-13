@@ -3,7 +3,7 @@ import React from "react";
 
 import { withStyles } from "@material-ui/core/styles";
 
-import { getString } from "@artispace/utils/lib/ADTS/state";
+import { getStringC } from "@artispace/utils/lib/ADTS/state";
 
 import Typography from "../Typography";
 
@@ -44,15 +44,20 @@ const Image = (props: {
   title?: string
 }) => {
   const { classes } = props;
-  const safeTitle: string = getString("title", "")(props);
-  const safeSrc: string = getString("src", "")(props);
+  const safeTitle: string = getStringC("title", "")(props);
+  const safeSrc: string = getStringC("src", "")(props);
   return (
     <div className={classes.root}>
       <div className={classes.image}>
         <img src={safeSrc} alt={safeTitle} className={classes.img} />
       </div>
       <div className={classes.title}>
-        <Typography align="center" color="inherit" content={safeTitle} />
+        <Typography
+          align="center"
+          color="inherit"
+          content={safeTitle}
+          nobackground
+        />
       </div>
       <div className={classes.titleBackground} />
     </div>

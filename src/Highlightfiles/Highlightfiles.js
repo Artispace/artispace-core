@@ -21,7 +21,7 @@ import type { File } from "./singlefile";
 
 import type { HOC } from "recompose";
 
-import { getFilesC, getNonEmptyString } from "@artispace/utils/lib/ADTS/state";
+import { getArrayC, getNonEmptyString } from "@artispace/utils/lib/ADTS/state";
 
 type Props = {
   classes: Object,
@@ -68,7 +68,7 @@ class Highlightfiles extends Component<Props, {}> {
 
   render() {
     const { doespassmatch, errormessage } = this.state;
-    const safeFiles = getFilesC("files", [])(this.props);
+    const safeFiles = getArrayC("files", [])(this.props);
     const isPrivateKeyEmpty = safeprivatekey.map(isEmpty).evalWith(this.props);
     return (
       <div style={{ padding: 10 }}>

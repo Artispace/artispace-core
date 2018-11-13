@@ -12,7 +12,6 @@ import withWidth from "@material-ui/core/withWidth";
 import SwipeableViews from "react-swipeable-views";
 
 // crocks
-import prop from "crocks/Maybe/prop";
 import propPath from "crocks/Maybe/propPath";
 
 // utils
@@ -91,8 +90,6 @@ class SwipeableTextMobileStepper extends React.Component<Props, State> {
     const safeSteps: Array<Stepprop> = getArrayC("steps", [])(this.props);
 
     const safeStepsLength: number = safeSteps.length;
-
-    const getLabel = (step: Stepprop) => prop("label", step).option("");
 
     const safeHeight: number = propPath(
       ["height", formatwidth(width)],
