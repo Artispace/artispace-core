@@ -17,7 +17,8 @@
     "start": "nwb serve-react-demo",
     "test": "nwb test-react",
     "test:coverage": "nwb test-react --coverage",
-    "test:watch": "nwb test-react --server"
+    "test:watch": "nwb test-react --server",
+    "storybook": "start-storybook -p 9001 -c .storybook"
   },
   "dependencies": {},
   "peerDependencies": {
@@ -32,9 +33,15 @@
   },
   "devDependencies": {
     "@artispace/utils": "^1.0.1",
+    "@babel/core": "7.1.2",
     "@material-ui/core": "^3.4.0",
     "@material-ui/icons": "^3.0.1",
+    "@storybook/addon-actions": "3.4.11",
+    "@storybook/addon-links": "3.4.11",
+    "@storybook/addons": "3.4.11",
+    "@storybook/react": "3.4.11",
     "babel-cli": "^6.26.0",
+    "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.x",
     "babel-preset-flow": "^6.23.0",
     "crocks": "0.11.x",
