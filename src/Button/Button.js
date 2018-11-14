@@ -120,7 +120,7 @@ const styles = (theme: Object) => ({
 
 const Buttonwithstyles = withStyles(styles)(Buttoncomponent);
 
-const optimize: HOC<*, boolean> = recomposecompose(
+const optimize: HOC<*, Props> = recomposecompose(
   shouldUpdate(
     (prev, next) =>
       prev.align !== next.align ||

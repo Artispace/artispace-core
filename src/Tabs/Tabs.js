@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import { componentFromProp } from "recompose";
+import componentFromProp from "recompose/componentFromProp";
 
 // crocks imports
 import dissoc from "crocks/helpers/dissoc";
@@ -26,7 +26,9 @@ import {
 import { isPropTrueC } from "@artispace/utils/lib/ADTS/pred";
 
 const Genericcomponent = componentFromProp("component");
-const Genericicon = componentFromProp("component");
+// const Genericicon = componentFromProp("component");
+
+const Def = () => <button>Sasa</button>;
 
 const styles = (theme: Object) => ({
   root: {
@@ -82,12 +84,13 @@ type Tabprop = {
 };
 
 type Props = {
-  classes: Object,
-  design: string,
-  tabs: Array<Tabprop>,
-  components: Array<any>,
-  edit: boolean,
-  centered: boolean
+  classes?: Object,
+  design?: string,
+  tabs?: Array<Tabprop>,
+  components?: Array<any>,
+  edit?: boolean,
+  centered?: boolean,
+  secondary?: boolean
 };
 
 type State = {
@@ -176,12 +179,15 @@ class CustomizedTabs extends React.Component<Props, State> {
     const safeComponents: Array<any> = getArrayC("components", [])(this.props);
 
     const safeRenderComponent: any => mixed = getFunctionC(
-      "renderFunction",
-      () => {}
+      "renderComponent",
+      () => Def
     )(this.props);
-    const safeRenderIcon: any => mixed = getFunctionC("renderIcon", () => {})(
-      this.props
-    );
+    console.log(Def);
+    // const safeRenderIcon: any => mixed = getFunctionC("renderIcon", () => {})(
+    //   this.props
+    // );
+
+    console.log(safeRenderComponent(12));
 
     return (
       <Paper elevation={0}>
@@ -197,24 +203,12 @@ class CustomizedTabs extends React.Component<Props, State> {
             classes={{ root: safeRootTabs, indicator: safeIndicator }}
           >
             {safeTabs.map((tab, i) => {
-              const isIconPropPresent: React.Node | void = getObject(
-                "icon",
-                null
-              )
-                .map(c =>
-                  Boolean(c) ? (
-                    <Genericicon component={safeRenderIcon(c.icon)} />
-                  ) : null
-                )
-                .evalWith(tab);
-
               return (
                 <Tab
                   key={i}
                   disableRipple={safeRippleDisable}
                   classes={{ root: safeRootTab, selected: classes.tabSelected }}
                   label={tab.label}
-                  icon={isIconPropPresent}
                 />
               );
             })}
@@ -240,7 +234,7 @@ class CustomizedTabs extends React.Component<Props, State> {
 
 const Roottabs = withStyles(styles)(CustomizedTabs);
 
-const optimize: HOC<*, boolean> = compose(
+const optimize = compose(
   shouldUpdate(
     (prev, next) =>
       prev.customtheme !== next.customtheme ||
@@ -252,4 +246,4 @@ const optimize: HOC<*, boolean> = compose(
   )
 );
 
-export default optimize((props: Exportprop) => <Roottabs {...props} />);
+export default optimize((props: Props) => <Roottabs {...props} />);

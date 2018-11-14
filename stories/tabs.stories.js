@@ -6,14 +6,18 @@ import orange from "@material-ui/core/colors/orange";
 import green from "@material-ui/core/colors/green";
 import pink from "@material-ui/core/colors/pink";
 
+import renderComponent from "../demo/src/renderComponents";
+
 import Tabs from "../src/Tabs";
 
 const tabs = [
   {
-    label: "Art"
+    label: "Art",
+    tabId: 1
   },
   {
-    label: "Design"
+    label: "Design",
+    tabId: 2
   }
 ];
 
@@ -36,4 +40,27 @@ storiesOf("Tabs", module)
     <MuiThemeProvider theme={theme}>
       <Tabs tabs={tabs} design="pill" secondary={true} />
     </MuiThemeProvider>
-  ));
+  ))
+  .add(
+    "Tabs with 2 tabs, pill design and also components to accompany them",
+    () => (
+      <MuiThemeProvider theme={theme}>
+        <Tabs
+          tabs={tabs}
+          design="pill"
+          secondary={true}
+          renderComponent={renderComponent}
+          components={[
+            {
+              component: "Avatar",
+              tabId: 1
+            },
+            {
+              component: "Buttonbase",
+              tabId: 2
+            }
+          ]}
+        />
+      </MuiThemeProvider>
+    )
+  );

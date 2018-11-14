@@ -57,6 +57,7 @@ const Avatarcomponent = (props: Props) => {
     height: safeSize,
     width: safeSize
   };
+  console.log(props);
   if (safeLetter) return <Avatar style={style}>{safeLetter}</Avatar>;
   return <Avatar style={style} alt={safeAlt} src={safeSrc} />;
 };

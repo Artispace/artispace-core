@@ -6,6 +6,10 @@ import Avatar from "../../src/Avatar";
 
 import Carousel from "../../src/Carousel";
 
+import Tabs from "../../src/Tabs";
+
+import renderComponent from "./renderComponents";
+
 const images = [
   {
     src:
@@ -19,12 +23,41 @@ const images = [
   }
 ];
 
+const tabs = [
+  {
+    label: "Art",
+    tabId: 1
+  },
+  {
+    label: "Design",
+    tabId: 2
+  }
+];
+
 class Demo extends Component {
   render() {
+    const A = renderComponent("Avarar");
+    console.log(A);
+
     return (
       <div>
         <Button />
         <Carousel images={images} caption="A simple caption" />
+        <Tabs
+          tabs={tabs}
+          design="pill"
+          secondary={true}
+          components={[
+            {
+              component: "Avatar",
+              tabId: 1,
+              letter: "M"
+            }
+          ]}
+          renderComponent={renderComponent}
+        />
+
+        <A />
       </div>
     );
   }
