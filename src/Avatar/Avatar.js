@@ -10,7 +10,7 @@ import compose from "recompose/compose";
 import shouldUpdate from "recompose/shouldUpdate";
 
 // types
-import type { HOC } from "recompose";
+// import type { HOC } from "recompose";
 import type { Theme } from "../../flowtypes/palette";
 
 import {

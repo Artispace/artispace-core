@@ -75,8 +75,8 @@ export function returnColor(color: string): Object {
 }
 
 type Customthemetype = {
-  primary?: string,
-  secondary?: string,
+  primary?: Object,
+  secondary?: Object,
   type?: string
 };
 
@@ -84,7 +84,7 @@ type Themeprops = {
   palette: Customthemetype
 };
 
-export const paletteFn = (props): Themeprops => {
+export const paletteFn = (props: Object): Themeprops => {
   const safeTypeValue = (type: string) => (type === "light" ? "light" : "dark");
   const primary = getNonEmptyStringC("primary", "purple")(props.customtheme);
   const secondary = getNonEmptyStringC("secondary", "green")(props.customtheme);
@@ -101,6 +101,36 @@ export const paletteFn = (props): Themeprops => {
   };
 };
 
+type TypographyObject = {
+  fontFamily: string
+};
+
+type Typography = {
+  typography: TypographyObject
+};
+const typographyOptions = (props: Object): Typography => {
+  const safeFontFamily: string = getNonEmptyStringC("fontfamily", null)(props);
+
+  // This will make sure WebFont.load is only used in the browser.
+  if (typeof window !== "undefined" && !Boolean(safeFontFamily)) {
+    var WebFont = require("webfontloader");
+
+    WebFont.load({
+      google: {
+        families: [safeFontFamily]
+      }
+    });
+  }
+
+  return Boolean(safeFontFamily)
+    ? {
+        typography: {
+          fontFamily: safeFontFamily.split(":")[0]
+        }
+      }
+    : {};
+};
+
 type Props = {
   customtheme: Customthemetype,
   children?: React.Node
@@ -108,7 +138,12 @@ type Props = {
 
 const Themecomponent = (props: Props) => {
   return (
-    <MuiThemeProvider theme={createMuiTheme(paletteFn(props))}>
+    <MuiThemeProvider
+      theme={createMuiTheme({
+        ...paletteFn(props),
+        ...typographyOptions(props)
+      })}
+    >
       {props.children}
     </MuiThemeProvider>
   );

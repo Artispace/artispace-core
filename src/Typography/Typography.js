@@ -2,11 +2,7 @@
 import React from "react";
 
 import Typography from "@material-ui/core/Typography";
-import {
-  MuiThemeProvider,
-  createMuiTheme,
-  withStyles
-} from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 import classNames from "classnames";
 
 // recompose
@@ -21,14 +17,14 @@ import {
 
 import type { HOC } from "recompose";
 
-import { paletteFn } from "../Theme/Theme";
-
 type Props = {
   align?: string,
   color?: string,
   content?: string,
   variant?: string,
-  fontfamily?: string
+  fontfamily?: string,
+  classes: Object,
+  nobackground?: boolean
 };
 
 const Typographycomponent = (props: Props) => {
@@ -37,27 +33,7 @@ const Typographycomponent = (props: Props) => {
   const safeVariant: string = getNonEmptyStringC("variant", "subtitle1")(props);
   const safeColor: string = getNonEmptyStringC("color", "inherit")(props);
   const safeAlign: string = getStringC("align", "center")(props);
-  const safeFontFamily: string = getStringC("fontfamily", "Roboto")(props);
   const safeComponent: string = getStringC("component", "p")(props);
-
-  const palette = paletteFn(props).palette;
-  const theme = createMuiTheme({
-    palette,
-    typography: {
-      fontFamily: safeFontFamily.split(":")[0]
-    }
-  });
-
-  // This will make sure WebFont.load is only used in the browser.
-  if (typeof window !== "undefined") {
-    var WebFont = require("webfontloader");
-
-    WebFont.load({
-      google: {
-        families: [safeFontFamily]
-      }
-    });
-  }
 
   return (
     <div
@@ -65,17 +41,15 @@ const Typographycomponent = (props: Props) => {
         [classes.background]: !props.nobackground
       })}
     >
-      <MuiThemeProvider theme={theme}>
-        <Typography
-          variant={safeVariant}
-          color={safeColor}
-          gutterBottom
-          align={safeAlign}
-          component={safeComponent}
-        >
-          {safeTypography}
-        </Typography>
-      </MuiThemeProvider>
+      <Typography
+        variant={safeVariant}
+        color={safeColor}
+        gutterBottom
+        align={safeAlign}
+        component={safeComponent}
+      >
+        {safeTypography}
+      </Typography>
     </div>
   );
 };
@@ -88,7 +62,7 @@ const styles = theme => ({
 
 const TypographywithStyles = withStyles(styles)(Typographycomponent);
 
-const optimize: HOC<*, boolean> = compose(
+const optimize: HOC<*, Props> = compose(
   shouldUpdate(
     (prev, next) =>
       prev.content !== next.content ||
