@@ -4,6 +4,9 @@ import * as React from "react";
 
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
+import compose from "recompose/compose";
+import { withTheme } from "@material-ui/core/styles";
+
 import amber from "@material-ui/core/colors/amber";
 import blue from "@material-ui/core/colors/blue";
 import blueGrey from "@material-ui/core/colors/blueGrey";
@@ -112,7 +115,7 @@ const typographyOptions = (props: Object): Typography => {
   const safeFontFamily: string = getNonEmptyStringC("fontfamily", null)(props);
 
   // This will make sure WebFont.load is only used in the browser.
-  if (typeof window !== "undefined" && !Boolean(safeFontFamily)) {
+  if (typeof window !== "undefined" && Boolean(safeFontFamily)) {
     var WebFont = require("webfontloader");
 
     WebFont.load({
@@ -137,9 +140,11 @@ type Props = {
 };
 
 const Themecomponent = (props: Props) => {
+  console.log(props);
   return (
     <MuiThemeProvider
       theme={createMuiTheme({
+        ...props.theme,
         ...paletteFn(props),
         ...typographyOptions(props)
       })}
@@ -149,4 +154,4 @@ const Themecomponent = (props: Props) => {
   );
 };
 
-export default Themecomponent;
+export default compose(withTheme())(Themecomponent);
