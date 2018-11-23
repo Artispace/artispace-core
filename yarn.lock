@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@artispace/utils@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@artispace/utils/-/utils-1.0.1.tgz#d32a18ca23da3b47af02c9c19a96b3f769c785c9"
-  integrity sha512-6u4tWd0hv/e4unOh1GDCt5x0l3OucjFg4lo3Qs2VouIAmLHyvHHzKLLVMT+YIqxSvGwjxzSoRzUK4PdxqsOohQ==
+"@artispace/utils@^1.0.51":
+  version "1.0.51"
+  resolved "https://registry.yarnpkg.com/@artispace/utils/-/utils-1.0.51.tgz#996b73e2029a038b5c921ddee2d4cd0050803f69"
+  integrity sha512-oJF3vo6qg2SZeTDJsGLOJMnKQQ7SCH+XoO7q5VvmWODeUGMrVUVxc1f5W4aDg/sIAFnIC0e8TrHMply+r3eXGA==
 
 "@babel/code-frame@^7.0.0":
   version "7.0.0"

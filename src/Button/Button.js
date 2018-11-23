@@ -17,6 +17,7 @@ import type { HOC } from "recompose";
 // will import from artispace
 import { getStringC } from "@artispace/utils/lib/ADTS/state";
 import { isObjectPropTrueC } from "@artispace/utils/lib/ADTS/pred";
+import { valInPathC } from "@artispace/utils/lib/ADTS/maybe";
 
 type ButtonVariants =
   | "flat"
@@ -66,6 +67,8 @@ const Buttoncomponent = (props: Props) => {
 
   const safeAlign: Flex = getStringC("align", "center")(props);
 
+  const safeComponent = valInPathC(["component"], "div")(props);
+
   // the font
   // This will make sure WebFont.load is only used in the browser.
   if (typeof window !== "undefined") {
@@ -78,7 +81,7 @@ const Buttoncomponent = (props: Props) => {
     });
   }
 
-  const removeUnwantedObjects: Object = compose(
+  const removeUnwantedObjects: any => Object = compose(
     dissoc("edit"),
     dissoc("classes"),
     dissoc("nobackground")
@@ -96,11 +99,12 @@ const Buttoncomponent = (props: Props) => {
       <Grid item>
         <Button
           color="primary"
+          {...removeUnwantedObjects(props)}
           variant={safeVariant}
           size={safeSize}
           fullWidth={safeWidth}
           style={{ fontFamily: safeFontFamily }}
-          {...removeUnwantedObjects(props)}
+          component={safeComponent}
         >
           {safeContent}
         </Button>
