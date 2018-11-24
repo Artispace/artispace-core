@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import compose from "crocks/helpers/compose";
+import Typography from "../Typography";
 
 import dissoc from "crocks/helpers/dissoc";
 
@@ -40,7 +41,6 @@ type Flex =
 type Props = {
   align?: string,
   edit?: boolean,
-  fontfamily?: string,
   justify?: Flex,
   variant?: ButtonVariants,
   size?: Size,
@@ -53,8 +53,6 @@ type Props = {
 
 const Buttoncomponent = (props: Props) => {
   const { classes } = props;
-
-  const safeFontFamily: string = getStringC("fontfamily", "Roboto")(props);
 
   const safeVariant: ButtonVariants = getStringC("variant", "text")(props);
 
@@ -69,18 +67,6 @@ const Buttoncomponent = (props: Props) => {
   const safeAlign: Flex = getStringC("align", "center")(props);
 
   const safeComponent = valInPathC(["component"], "div")(props);
-
-  // the font
-  // This will make sure WebFont.load is only used in the browser.
-  if (typeof window !== "undefined") {
-    var WebFont = require("webfontloader");
-
-    WebFont.load({
-      google: {
-        families: [safeFontFamily]
-      }
-    });
-  }
 
   const removeUnwantedObjects: any => Object = compose(
     dissoc("edit"),
@@ -104,10 +90,9 @@ const Buttoncomponent = (props: Props) => {
           variant={safeVariant}
           size={safeSize}
           fullWidth={safeWidth}
-          style={{ fontFamily: safeFontFamily }}
           component={safeComponent}
         >
-          {safeContent}
+          <Typography content={safeContent} nobackground variant="button" />
         </Button>
       </Grid>
     </Grid>
@@ -131,7 +116,6 @@ const optimize: HOC<*, Props> = recomposecompose(
       prev.align !== next.align ||
       prev.edit !== next.edit ||
       prev.justify !== next.justify ||
-      prev.fontfamily !== next.fontfamily ||
       prev.variant !== next.variant ||
       prev.content !== next.content ||
       prev.fullWidth !== next.fullWidth ||
