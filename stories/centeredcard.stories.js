@@ -3,6 +3,8 @@ import { storiesOf } from "@storybook/react";
 
 import CenteredCard from "../src/Centeredcard";
 
+import LinkButton from "../src/Button";
+
 const background =
   "https://images.pexels.com/photos/1393996/pexels-photo-1393996.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
 
@@ -47,5 +49,6 @@ storiesOf("CenteredCard", module)
         href: "/goodintent",
         content: "Link"
       }}
+      LinkButton={LinkButton}
     />
   ));

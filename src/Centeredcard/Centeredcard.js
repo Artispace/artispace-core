@@ -24,9 +24,6 @@ import {
 
 import formatWidth from "../utils/width";
 
-//
-import LinkButton from "../Button";
-
 const styles = (theme: Object) => ({
   root: {
     display: "flex",
@@ -109,7 +106,7 @@ type Props = {
 type Optionalcomponent = React.Node | null;
 
 function CenteredCard(props: Props) {
-  const { classes, width } = props;
+  const { classes, width, LinkButton } = props;
   const safeHeight = getObject("height", {})
     .map(height => {
       return propPath(["height", formatWidth(width)], props).option(250);
