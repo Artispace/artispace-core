@@ -11,6 +11,8 @@ import compose from "recompose/compose";
 //utils
 import { getStringC, getArrayC } from "@artispace/utils/lib/ADTS/state";
 
+import { HOC } from "recompose";
+
 import Typography from "../Typography";
 import Image from "./image";
 import Controls from "./Carouselcontrols";
@@ -93,7 +95,7 @@ const stylestheme = theme => ({
 
 const StyledCarousel = withStyles(stylestheme)(Carousell);
 
-const optimize = compose(
+const optimize: HOC<*, Props> = compose(
   shouldUpdate(
     (prev, next) =>
       prev.caption !== next.caption ||

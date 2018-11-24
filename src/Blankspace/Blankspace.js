@@ -9,7 +9,8 @@ import shouldUpdate from "recompose/shouldUpdate";
 import type { HOC } from "recompose";
 
 type Props = {
-  height?: number
+  height?: number,
+  edit?: boolean
 };
 const Blankspace = (props: Props) => {
   const safeHeight = getNumberC("height", 20)(props);
@@ -22,7 +23,7 @@ const Blankspace = (props: Props) => {
   );
 };
 
-const optimize: HOC<*, boolean> = compose(
+const optimize: HOC<*, Props> = compose(
   shouldUpdate(
     (prev, next) => prev.height !== next.height || prev.edit !== next.edit
   )

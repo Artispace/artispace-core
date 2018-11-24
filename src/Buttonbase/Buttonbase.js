@@ -160,7 +160,7 @@ const BasewithStyle = compose(
   withWidth()
 )(Base);
 
-const optimize: HOC<*, boolean> = compose(
+const optimize: HOC<*, Props> = compose(
   shouldUpdate(
     (prev, next) =>
       prev.title !== next.title ||

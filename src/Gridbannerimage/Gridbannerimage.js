@@ -105,9 +105,7 @@ const Gridbannerimage = compose(
   withWidth()
 )(Griditem);
 
-type Editingprops = {};
-
-const optimize: HOC<*, boolean> = compose(
+const optimize: HOC<*, Itemprops> = compose(
   shouldUpdate(
     (prev, next) =>
       prev.edit !== next.edit ||
@@ -117,6 +115,4 @@ const optimize: HOC<*, boolean> = compose(
   )
 );
 
-export default optimize((props: Editingprops) => (
-  <Gridbannerimage {...props} />
-));
+export default optimize((props: Itemprops) => <Gridbannerimage {...props} />);

@@ -4,6 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
 import componentFromProp from "recompose/componentFromProp";
 
 // crocks imports
@@ -17,7 +18,6 @@ import shouldUpdate from "recompose/shouldUpdate";
 
 // utilities
 import {
-  getObject,
   getArrayC,
   getFunctionC,
   getBooleanC,
@@ -28,7 +28,7 @@ import { isPropTrueC } from "@artispace/utils/lib/ADTS/pred";
 const Genericcomponent = componentFromProp("component");
 // const Genericicon = componentFromProp("component");
 
-const Def = () => <button>Sasa</button>;
+const Def = () => <Typography>Sorry, Could'nt Load</Typography>;
 
 const styles = (theme: Object) => ({
   root: {
@@ -181,13 +181,9 @@ class CustomizedTabs extends React.Component<Props, State> {
     const safeRenderComponent: any => mixed = getFunctionC(
       "renderComponent",
       () => Def
-    )(this.props);
-    console.log(Def);
-    // const safeRenderIcon: any => mixed = getFunctionC("renderIcon", () => {})(
+    )(this.props); // const safeRenderIcon: any => mixed = getFunctionC("renderIcon", () => {})(
     //   this.props
     // );
-
-    console.log(safeRenderComponent(12));
 
     return (
       <Paper elevation={0}>

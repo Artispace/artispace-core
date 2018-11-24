@@ -1,6 +1,6 @@
 {
   "name": "@artispace/core",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "artispace Core React components",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -41,7 +41,7 @@
     "@storybook/addons": "3.4.11",
     "@storybook/react": "3.4.11",
     "babel-cli": "^6.26.0",
-    "babel-core": "7.0.0-bridge.0",
+    "babel-core": "^6.26.3",
     "babel-eslint": "9.x",
     "babel-preset-flow": "^6.23.0",
     "crocks": "0.11.x",

@@ -10,7 +10,7 @@ import compose from "recompose/compose";
 import shouldUpdate from "recompose/shouldUpdate";
 
 // types
-// import type { HOC } from "recompose";
+import type { HOC } from "recompose";
 import type { Theme } from "../../flowtypes/palette";
 
 import {
@@ -30,7 +30,9 @@ type Props = {
   src?: string,
   letter?: string,
   secondary?: string,
-  size?: number
+  size?: number,
+  customtheme?: Object,
+  edit?: boolean
 };
 
 const Avatarcomponent = (props: Props) => {
@@ -57,14 +59,13 @@ const Avatarcomponent = (props: Props) => {
     height: safeSize,
     width: safeSize
   };
-  console.log(props);
   if (safeLetter) return <Avatar style={style}>{safeLetter}</Avatar>;
   return <Avatar style={style} alt={safeAlt} src={safeSrc} />;
 };
 
 const Avatarcomponentwiththeme = withTheme()(Avatarcomponent);
 
-const optimize = compose(
+const optimize: HOC<*, Props> = compose(
   shouldUpdate(
     (prev, next) =>
       prev.alt !== next.alt ||

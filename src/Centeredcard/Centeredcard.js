@@ -156,7 +156,7 @@ function CenteredCard(props: Props) {
   const safeLink: Optionalcomponent = getObject("link", null)
     .map(link =>
       Boolean(link) ? (
-        <LinkButton variant="raised" {...{ link }} nobackground />
+        <LinkButton variant="raised" {...{ link }} {...link} nobackground />
       ) : null
     )
     .evalWith(props);
@@ -190,7 +190,7 @@ function CenteredCard(props: Props) {
   );
 }
 
-const optimize: HOC<*, boolean> = compose(
+const optimize: HOC<*, Props> = compose(
   shouldUpdate(
     (prev, next) =>
       prev.avatar !== next.avatar ||

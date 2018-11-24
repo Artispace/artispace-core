@@ -174,7 +174,7 @@ const StyledGridList = compose(
   withWidth()
 )(GridListComponent);
 
-const optimize: HOC<*, boolean> = compose(
+const optimize: HOC<*, Props> = compose(
   shouldUpdate(
     (prev, next) =>
       prev.edit !== next.edit ||

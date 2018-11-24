@@ -12,10 +12,6 @@ import Typography from "@material-ui/core/Typography";
 
 import compose from "crocks/helpers/compose";
 
-//recompose
-import recompose from "recompose/compose";
-import pure from "recompose/pure";
-
 import {
   resolveIconSvgImage,
   getfileextensionfromname

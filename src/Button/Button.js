@@ -38,6 +38,7 @@ type Flex =
   | "space-evenly";
 
 type Props = {
+  align?: string,
   edit?: boolean,
   fontfamily?: string,
   justify?: Flex,

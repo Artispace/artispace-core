@@ -116,7 +116,7 @@ class Highlightfiles extends Component<Props, {}> {
   }
 }
 
-const optimize: HOC<*, boolean> = compose(
+const optimize: HOC<*, Props> = compose(
   shouldUpdate(
     (prev, next) =>
       prev.edit !== next.edit ||
@@ -126,4 +126,4 @@ const optimize: HOC<*, boolean> = compose(
   )
 );
 
-export default optimize(props => <Highlightfiles {...props} />);
+export default optimize((props: Props) => <Highlightfiles {...props} />);

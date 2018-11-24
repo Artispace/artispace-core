@@ -26,6 +26,8 @@ import formattedwidth from "../utils/width";
 // utils
 import { getArrayC, getStringC } from "@artispace/utils/lib/ADTS/state";
 
+import type { HOC } from "recompose";
+
 import type { File } from "../../flowtypes/file";
 
 type Themetype = {
@@ -196,9 +198,7 @@ const Stepperwithstyles = compose(
   withWidth()
 )(Steppercomponent);
 
-type Themeprops = {};
-
-const optimize: HOC<*, boolean> = compose(
+const optimize: HOC<*, Props> = compose(
   shouldUpdate(
     (prev, next) =>
       prev.edit !== next.edit ||
@@ -210,6 +210,4 @@ const optimize: HOC<*, boolean> = compose(
   )
 );
 
-export default optimize((props: Themeprops) => (
-  <Stepperwithstyles {...props} />
-));
+export default optimize((props: Props) => <Stepperwithstyles {...props} />);

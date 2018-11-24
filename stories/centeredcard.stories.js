@@ -44,7 +44,8 @@ storiesOf("CenteredCard", module)
       title="Title"
       content="Content is here"
       link={{
-        href: "/goodintent"
+        href: "/goodintent",
+        content: "Link"
       }}
     />
   ));

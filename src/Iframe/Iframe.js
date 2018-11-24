@@ -88,7 +88,7 @@ const Iframecompositioncomponent = compose(
   withWidth()
 )(Iframecomponent);
 
-const optimize: HOC<*, boolean> = compose(
+const optimize: HOC<*, Props> = compose(
   shouldUpdate(
     (prev, next) =>
       prev.caption !== next.caption ||

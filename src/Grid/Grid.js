@@ -110,11 +110,7 @@ class Gridcomponent extends React.Component<Props, {}> {
 
 const Gridcomponentwithstyles = withStyles(styles)(Gridcomponent);
 
-type SafeProps = {
-  components: Array<any>
-};
-
-const optimize: HOC<*, boolean> = compose(
+const optimize: HOC<*, Props> = compose(
   shouldUpdate(
     (prev, next) =>
       prev.components !== next.components ||
@@ -127,6 +123,6 @@ const optimize: HOC<*, boolean> = compose(
   )
 );
 
-export default optimize((props: SafeProps) => (
+export default optimize((props: Props) => (
   <Gridcomponentwithstyles {...props} />
 ));

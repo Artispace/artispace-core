@@ -140,7 +140,6 @@ type Props = {
 };
 
 const Themecomponent = (props: Props) => {
-  console.log(props);
   return (
     <MuiThemeProvider
       theme={createMuiTheme({

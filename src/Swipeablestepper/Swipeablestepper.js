@@ -20,6 +20,13 @@ import formatwidth from "../utils/width";
 //safety
 import { getArrayC, getStringC } from "@artispace/utils/lib/ADTS/state";
 
+//types
+import type { HOC } from "recompose";
+
+import compose from "recompose/compose";
+
+import shouldUpdate from "recompose/shouldUpdate";
+
 const styles = (theme: Object) => ({
   root: {
     maxWidth: "100%",
@@ -162,4 +169,23 @@ class SwipeableTextMobileStepper extends React.Component<Props, State> {
   }
 }
 
-export default withWidth()(withStyles(styles)(SwipeableTextMobileStepper));
+const optimize: HOC<*, Props> = compose(
+  shouldUpdate(
+    (prev, next) =>
+      prev.edit !== next.edit ||
+      prev.customtheme !== next.customtheme ||
+      prev.steps !== next.steps ||
+      prev.orientation !== next.orientation ||
+      prev.onfinish !== next.onfinish ||
+      prev.width !== next.width ||
+      prev.height !== next.height
+  )
+);
+
+const Swipeablestepperwithstyles = withWidth()(
+  withStyles(styles)(SwipeableTextMobileStepper)
+);
+
+export default optimize((props: Props) => (
+  <Swipeablestepperwithstyles {...props} />
+));
