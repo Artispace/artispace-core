@@ -92,7 +92,12 @@ const Buttoncomponent = (props: Props) => {
           fullWidth={safeWidth}
           component={safeComponent}
         >
-          <Typography content={safeContent} nobackground variant="button" />
+          <Typography
+            content={safeContent}
+            color="inherit"
+            nobackground
+            variant="button"
+          />
         </Button>
       </Grid>
     </Grid>

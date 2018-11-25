@@ -11,7 +11,10 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typographycomponent from "@material-ui/core/Typography";
 
 const props = {
-  fontfamily: "Pacifico"
+  fontfamily: "Pacifico",
+  customtheme: {
+    type: "dark"
+  }
 };
 
 storiesOf("Typography", module)

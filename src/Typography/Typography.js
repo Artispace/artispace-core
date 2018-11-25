@@ -31,7 +31,7 @@ const Typographycomponent = (props: Props) => {
   const { classes } = props;
   const safeTypography: string = getStringC("content", "Typography")(props);
   const safeVariant: string = getNonEmptyStringC("variant", "subtitle1")(props);
-  const safeColor: string = getNonEmptyStringC("color", "inherit")(props);
+  const safeColor: string = getNonEmptyStringC("color", "contrast")(props);
   const safeAlign: string = getStringC("align", "center")(props);
   const safeComponent: string = getStringC("component", "p")(props);
 
