@@ -10,6 +10,13 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typographycomponent from "@material-ui/core/Typography";
 
+import CenteredCard from "../src/Centeredcard";
+
+import LinkButton from "../src/Button";
+
+const background =
+  "https://images.pexels.com/photos/1393996/pexels-photo-1393996.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
+
 const props = {
   fontfamily: "Pacifico",
   customtheme: {
@@ -31,5 +38,18 @@ storiesOf("Typography", module)
           </Typographycomponent>
         </Toolbar>
       </AppBar>
+      <CenteredCard
+        avatar={{
+          src: background
+        }}
+        background={background}
+        title="Title"
+        content="Content is here"
+        link={{
+          href: "/goodintent",
+          content: "Link"
+        }}
+        LinkButton={LinkButton}
+      />
     </Theme>
   ));

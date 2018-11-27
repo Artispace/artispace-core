@@ -100,7 +100,9 @@ type Props = {
     size?: number,
     src?: string
   },
-  link: Object
+  link: Object,
+  LinkButton?: React.Node,
+  customtheme?: Object
 };
 
 type Optionalcomponent = React.Node | null;
@@ -119,7 +121,11 @@ function CenteredCard(props: Props) {
   const safeTitle = titleContent
     .map(title =>
       Boolean(title) ? (
-        <Typography variant="h4" className={classes.imageText}>
+        <Typography
+          color="textPrimary"
+          variant="h4"
+          className={classes.imageText}
+        >
           {title}
         </Typography>
       ) : null
@@ -129,7 +135,9 @@ function CenteredCard(props: Props) {
   const safeContent: Optionalcomponent = getString("content", null)
     .map(content =>
       Boolean(content) ? (
-        <Typography className={classes.imageText}>{content}</Typography>
+        <Typography color="textPrimary" className={classes.imageText}>
+          {content}
+        </Typography>
       ) : null
     )
     .evalWith(props);
@@ -153,7 +161,7 @@ function CenteredCard(props: Props) {
   const safeLink: Optionalcomponent = getObject("link", null)
     .map(link =>
       Boolean(link) ? (
-        <LinkButton variant="raised" {...{ link }} {...link} nobackground />
+        <LinkButton variant="contained" {...{ link }} {...link} nobackground />
       ) : null
     )
     .evalWith(props);
@@ -191,7 +199,6 @@ const optimize: HOC<*, Props> = compose(
   shouldUpdate(
     (prev, next) =>
       prev.avatar !== next.avatar ||
-      prev.edit !== next.edit ||
       prev.title !== next.title ||
       prev.content !== next.content ||
       prev.background !== next.background ||
