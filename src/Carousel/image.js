@@ -5,6 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
 
+import Typography from "../Typography";
 import { getStringC } from "@artispace/utils/lib/ADTS/state";
 
 const styles = (theme: Object) => ({
@@ -15,7 +16,8 @@ const styles = (theme: Object) => ({
   image: {
     width: "100%",
     maxHeight: 400,
-    height: "auto"
+    height: "auto",
+    listStyleType: "none"
   },
   img: {
     width: "100%",
@@ -38,7 +40,13 @@ const Image = (props: {
     <div className={classes.root}>
       <GridListTile className={classes.image}>
         <img src={safeSrc} alt={safeTitle} className={classes.img} />
-        <GridListTileBar title={safeTitle} />
+        <GridListTileBar
+          title={
+            <Typography align="center" nobackground color="inherit">
+              {safeTitle}
+            </Typography>
+          }
+        />
       </GridListTile>
     </div>
   );

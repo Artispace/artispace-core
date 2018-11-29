@@ -11,11 +11,25 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typographycomponent from "@material-ui/core/Typography";
 
 import CenteredCard from "../src/Centeredcard";
+import Carousel from "../src/Carousel";
 
 import LinkButton from "../src/Button";
 
 const background =
   "https://images.pexels.com/photos/1393996/pexels-photo-1393996.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940";
+
+const images = [
+  {
+    src:
+      "https://images.pexels.com/photos/1393996/pexels-photo-1393996.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    title: "Hey there"
+  },
+  {
+    src:
+      "https://images.pexels.com/photos/1393996/pexels-photo-1393996.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+    title: "Hello there"
+  }
+];
 
 const props = {
   fontfamily: "Pacifico",
@@ -51,5 +65,6 @@ storiesOf("Typography", module)
         }}
         LinkButton={LinkButton}
       />
+      <Carousel caption="Custom caption" images={images} />
     </Theme>
   ));
