@@ -16,7 +16,7 @@ const styles = (theme: Object) => ({
   item: {
     width: 15,
     height: 15,
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: theme.palette.text.primary,
     marginRight: 5
   },
   active: {
