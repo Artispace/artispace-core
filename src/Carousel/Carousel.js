@@ -72,8 +72,7 @@ class Carousell extends React.Component<Props, State> {
         />
         <div
           style={{
-            position: "relative",
-            top: safeImages.length > 0 ? -80 : 0
+            position: "relative"
           }}
         >
           <Typography

@@ -4,16 +4,10 @@ import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import classNames from "classnames";
 
-import compose from "recompose/compose";
-import pure from "recompose/pure";
-
-const optimize = compose(pure);
-
 const styles = (theme: Object) => ({
   root: {
     display: "flex",
     height: 40,
-    top: -130,
     position: "relative",
     width: "100%",
     alignItems: "center",

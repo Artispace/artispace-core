@@ -2,10 +2,10 @@
 import React from "react";
 
 import { withStyles } from "@material-ui/core/styles";
+import GridListTile from "@material-ui/core/GridListTile";
+import GridListTileBar from "@material-ui/core/GridListTileBar";
 
 import { getStringC } from "@artispace/utils/lib/ADTS/state";
-
-import Typography from "../Typography";
 
 const styles = (theme: Object) => ({
   root: {
@@ -19,21 +19,9 @@ const styles = (theme: Object) => ({
   },
   img: {
     width: "100%",
-    maxHeight: 400,
+    maxHeight: 370,
     height: "auto",
     objectFit: "cover"
-  },
-  titleBackground: {
-    backgroundColor: theme.palette.common.black,
-    top: -130,
-    position: "relative",
-    opacity: 0.4,
-    height: 70
-  },
-  title: {
-    position: "relative",
-    top: -80,
-    zIndex: 100
   }
 });
 
@@ -48,18 +36,10 @@ const Image = (props: {
   const safeSrc: string = getStringC("src", "")(props);
   return (
     <div className={classes.root}>
-      <div className={classes.image}>
+      <GridListTile className={classes.image}>
         <img src={safeSrc} alt={safeTitle} className={classes.img} />
-      </div>
-      <div className={classes.title}>
-        <Typography
-          align="center"
-          color="inherit"
-          content={safeTitle}
-          nobackground
-        />
-      </div>
-      <div className={classes.titleBackground} />
+        <GridListTileBar title={safeTitle} />
+      </GridListTile>
     </div>
   );
 };
