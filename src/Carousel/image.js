@@ -42,9 +42,12 @@ const Image = (props: {
         <img src={safeSrc} alt={safeTitle} className={classes.img} />
         <GridListTileBar
           title={
-            <Typography align="center" nobackground color="inherit">
-              {safeTitle}
-            </Typography>
+            <Typography
+              align="center"
+              nobackground
+              color="inherit"
+              content={safeTitle}
+            />
           }
         />
       </GridListTile>
