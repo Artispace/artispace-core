@@ -10,4 +10,9 @@ storiesOf("Button", module)
   .add("Button with content", () => <Button content="Hello there tester" />)
   .add("Button with custom Link Component", () => (
     <Button content="I have a link" component={Link} />
+  ))
+  .add("Button with extended Variant", () => (
+    <div>
+      <Button content="Added the extended Fab" variant="extended" />
+    </div>
   ));

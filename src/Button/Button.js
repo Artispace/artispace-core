@@ -1,6 +1,8 @@
 // @flow
 import React from "react";
 import Button from "@material-ui/core/Button";
+import Fab from "@material-ui/core/Fab";
+
 import Grid from "@material-ui/core/Grid";
 import { withStyles } from "@material-ui/core/styles";
 import compose from "crocks/helpers/compose";
@@ -26,7 +28,7 @@ type ButtonVariants =
   | "contained"
   | "raised"
   | "fab"
-  | "extendedFab";
+  | "extended";
 
 type Size = "small" | "medium" | "large";
 
@@ -84,21 +86,37 @@ const Buttoncomponent = (props: Props) => {
       })}
     >
       <Grid item>
-        <Button
-          color="primary"
-          {...removeUnwantedObjects(props)}
-          variant={safeVariant}
-          size={safeSize}
-          fullWidth={safeWidth}
-          component={safeComponent}
-        >
-          <Typography
-            content={safeContent}
-            color="inherit"
-            nobackground
-            variant="button"
-          />
-        </Button>
+        {safeVariant === "extended" ? (
+          <Fab
+            color="primary"
+            {...removeUnwantedObjects(props)}
+            variant={safeVariant}
+            component={safeComponent}
+          >
+            <Typography
+              content={safeContent}
+              color="inherit"
+              nobackground
+              variant="button"
+            />
+          </Fab>
+        ) : (
+          <Button
+            color="primary"
+            {...removeUnwantedObjects(props)}
+            variant={safeVariant}
+            size={safeSize}
+            fullWidth={safeWidth}
+            component={safeComponent}
+          >
+            <Typography
+              content={safeContent}
+              color="inherit"
+              nobackground
+              variant="button"
+            />
+          </Button>
+        )}
       </Grid>
     </Grid>
   );
