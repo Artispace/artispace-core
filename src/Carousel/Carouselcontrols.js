@@ -29,17 +29,19 @@ const Carouselcontrols = ({
   classes,
   itemsnumber,
   index,
-  handleChangeIndex
+  handleChangeIndex,
+  safeImages
 }: {
   classes: Object,
   itemsnumber: number,
   index: number,
+  safeImages: Array<any>,
   handleChangeIndex: number => void
 }) => {
   const indexChange = index => () => handleChangeIndex(index);
   return (
     <div className={classes.root}>
-      {[...Array(itemsnumber).keys()].map((item, i) => (
+      {safeImages.map((item, i) => (
         <Paper
           className={classNames({
             [classes.item]: true,

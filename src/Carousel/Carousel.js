@@ -11,7 +11,7 @@ import compose from "recompose/compose";
 //utils
 import { getStringC, getArrayC } from "@artispace/utils/lib/ADTS/state";
 
-import { HOC } from "recompose";
+import type { HOC } from "recompose";
 
 import Typography from "../Typography";
 import Image from "./image";
@@ -31,7 +31,8 @@ type Item = {
 
 type Props = {
   images?: Array<Item>,
-  caption?: string
+  caption?: string,
+  customtheme?: Object
 };
 
 type State = {
@@ -66,7 +67,7 @@ class Carousell extends React.Component<Props, State> {
           ))}
         </SwipeableViews>
         <Controls
-          itemsnumber={safeImages.length}
+          {...{ safeImages }}
           index={index}
           handleChangeIndex={this.handleChangeIndex}
         />
@@ -98,7 +99,6 @@ const optimize: HOC<*, Props> = compose(
   shouldUpdate(
     (prev, next) =>
       prev.caption !== next.caption ||
-      prev.edit !== next.edit ||
       prev.images !== next.images ||
       prev.customtheme !== next.customtheme
   )
