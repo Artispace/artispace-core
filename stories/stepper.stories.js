@@ -1,7 +1,17 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 
 import Stepper from "../src/Stepper";
+
+const theme = createMuiTheme({
+  palette: {
+    type: "dark"
+  },
+  status: {
+    danger: "orange"
+  }
+});
 
 const steps = [
   {
@@ -36,4 +46,17 @@ storiesOf("Stepper", module)
         onfinish="Now that you have seen my info, check out my other things"
       />
     )
-  );
+  )
+  .add("Dark stepper", () => (
+    <MuiThemeProvider theme={theme}>
+      <Stepper
+        steps={steps}
+        orientation={{
+          sm: "horizontal",
+          md: "vertical",
+          lg: "horizontal"
+        }}
+        onfinish="Now that you have seen my info, check out my other things"
+      />
+    </MuiThemeProvider>
+  ));

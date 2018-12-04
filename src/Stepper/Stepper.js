@@ -8,7 +8,7 @@ import StepContent from "@material-ui/core/StepContent";
 import StepButton from "@material-ui/core/StepButton";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
+import Typography from "../Typography";
 
 import withWidth from "@material-ui/core/withWidth";
 
@@ -128,7 +128,7 @@ class Steppercomponent extends React.Component<Props, State> {
             Back
           </Button>
           <Button
-            variant="raised"
+            variant="contained"
             color="primary"
             onClick={this.handleNext}
             className={classes.button}
@@ -149,7 +149,7 @@ class Steppercomponent extends React.Component<Props, State> {
                 <Step key={index}>
                   <StepLabel>{step.label}</StepLabel>
                   <StepContent>
-                    <Typography>{step.content}</Typography>
+                    <Typography align="left" content={step.content} />
                     <Filescollection files={safeFiles} />
                     <Renderbuttons />
                   </StepContent>
@@ -172,7 +172,7 @@ class Steppercomponent extends React.Component<Props, State> {
               marginLeft: 20
             }}
           >
-            <Typography>{safeSteps[activeStep].content}</Typography>
+            <Typography align="left" content={safeSteps[activeStep].content} />
             <Filescollection
               files={getArrayC("files", [])(safeSteps[activeStep])}
             />
@@ -181,7 +181,7 @@ class Steppercomponent extends React.Component<Props, State> {
         )}
         {activeStep === safeSteps.length && (
           <Paper square elevation={0} className={classes.resetContainer}>
-            <Typography>{safeFinish}</Typography>
+            <Typography align="left" content={safeFinish} />
             <Button onClick={this.handleReset} className={classes.button}>
               Reset
             </Button>

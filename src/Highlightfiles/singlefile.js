@@ -57,10 +57,20 @@ const Singlefiledisplay = (props: Props) => {
           title={file.reference}
         />
         <CardContent>
-          <Typography gutterBottom noWrap variant="overline">
+          <Typography
+            gutterBottom
+            noWrap
+            variant="overline"
+            color="textPrimary"
+          >
             {file.reference}
           </Typography>
-          <Typography gutterBottom noWrap variant="subtitle1">
+          <Typography
+            gutterBottom
+            noWrap
+            variant="subtitle1"
+            color={"textPrimary"}
+          >
             {file.description}
           </Typography>
         </CardContent>
