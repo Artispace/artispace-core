@@ -5,6 +5,7 @@ import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import withWidth from "@material-ui/core/withWidth";
+import Grid from "@material-ui/core/Grid";
 
 //recompose
 import compose from "recompose/compose";
@@ -26,9 +27,8 @@ import formatWidth from "../utils/width";
 
 const styles = (theme: Object) => ({
   root: {
-    display: "flex",
-    flexWrap: "wrap",
-    width: "100%"
+    flexGrow: 1,
+    padding: 16
   },
   image: {
     position: "relative",
@@ -172,6 +172,12 @@ function CenteredCard(props: Props) {
   return (
     <div className={classes.root}>
       <ButtonBase
+        component={Grid}
+        container
+        justify="center"
+        alignItems="center"
+        direction="column"
+        spacing={8}
         disableRipple
         className={classes.image}
         focusVisibleClassName={classes.focusVisible}
@@ -185,10 +191,10 @@ function CenteredCard(props: Props) {
         />
         <span className={classes.imageBackdrop} />
         <span className={classes.imageButton}>
-          {safeAvatar}
-          {safeTitle}
-          {safeContent}
-          {safeLink}
+          <Grid item>{safeAvatar}</Grid>
+          <Grid item>{safeTitle}</Grid>
+          <Grid item>{safeContent}</Grid>
+          <Grid item>{safeLink}</Grid>
         </span>
       </ButtonBase>
     </div>
