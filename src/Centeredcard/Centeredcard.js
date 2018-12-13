@@ -1,7 +1,6 @@
 // @flow
 import * as React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import withWidth from "@material-ui/core/withWidth";
@@ -18,6 +17,15 @@ import propPath from "crocks/Maybe/propPath";
 import isObject from "crocks/predicates/isObject";
 import and from "crocks/logic/and";
 import hasProp from "crocks/predicates/hasProp";
+import crockscompose from "crocks/helpers/compose";
+import map from "crocks/pointfree/map";
+
+//MUI
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
 
 import type { HOC } from "recompose";
 
@@ -37,62 +45,9 @@ const styles = (theme: Object) => ({
     flexGrow: 1,
     padding: 16
   },
-  image: {
-    position: "relative",
-    width: "100% !important", // Overrides inline-style
-    "&:hover, &$focusVisible": {
-      zIndex: 1,
-      "& $imageBackdrop": {
-        opacity: 0.15
-      },
-      "& $imageMarked": {
-        opacity: 0
-      }
-    }
-  },
-  focusVisible: {},
-  imageButton: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column",
-    color: theme.palette.common.white
-  },
-  imageSrc: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    backgroundSize: "cover",
-    backgroundPosition: "center 40%"
-  },
-  imageBackdrop: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    backgroundColor: theme.palette.background.default,
-    opacity: 0.6,
-    transition: theme.transitions.create("opacity")
-  },
-  imageText: {
-    position: "relative"
-  },
-  imageMarked: {
-    height: 3,
-    width: 18,
-    backgroundColor: theme.palette.common.white,
-    position: "absolute",
-    bottom: -2,
-    left: "calc(50% - 9px)",
-    transition: theme.transitions.create("opacity")
+  media: {
+    height: 0,
+    paddingTop: "56.25%" // 16:9
   }
 });
 
@@ -112,47 +67,28 @@ type Props = {
   customtheme?: Object
 };
 
-function Title(props) {
-  const { classes } = props;
-  const title: string = getStringC("title", "")(props);
-  return (
-    <Grid item>
-      <Typography
-        color="textPrimary"
-        variant="h4"
-        align="center"
-        className={classes.imageText}
-      >
-        {title}
-      </Typography>
-    </Grid>
-  );
-}
-
-const Rendertitle = branch(
-  doesPropExistC("title"),
-  renderComponent(Title),
-  renderNothing
-)(<div />);
+const getContent = getStringC("content", "");
 
 function Content(props) {
-  const { classes } = props;
-  const content = getStringC("content")(props);
+  const content = getContent(props);
   return (
-    <Grid item>
-      <Typography
-        color="textPrimary"
-        align="center"
-        className={classes.imageText}
-      >
+    <CardContent>
+      <Typography color="textPrimary" align="center">
         {content}
       </Typography>
-    </Grid>
+    </CardContent>
   );
 }
 
-const Rendercontent = branch(
+const isLengthGreaterThan100 = props => getContent(props).length > 65;
+
+const shouldContentRender = and(
   doesPropExistC("content"),
+  isLengthGreaterThan100
+);
+
+const Rendercontent = branch(
+  shouldContentRender,
   renderComponent(Content),
   renderNothing
 )(<div />);
@@ -188,7 +124,21 @@ const RenderAvatar = branch(
 function Linkcomponent(props) {
   const { link, LinkButton } = props;
   return (
-    <LinkButton variant="contained" {...{ link }} {...link} nobackground />
+    <CardActions
+      disableActionSpacing
+      style={{
+        display: "flex"
+      }}
+    >
+      <LinkButton
+        align="flex-end"
+        justify="flex-end"
+        variant="outlined"
+        {...{ link }}
+        {...link}
+        nobackground
+      />
+    </CardActions>
   );
 }
 
@@ -208,40 +158,30 @@ function CenteredCard(props: Props) {
     .evalWith(props);
   // const safeBackground = safe(isString, background).option("");
   const safeBackground: string = getStringC("background", "")(props);
-  // const titleContent = safe(isString, title);
-
+  const safeTitle: string = getStringC("title", "")(props);
+  const safeSubTitle: string = getStringC("content", "")(props);
+  const safeContent =
+    safeSubTitle.length > 64 ? `${safeSubTitle.slice(0, 64)}...` : safeSubTitle;
   const style = {
-    height: safeHeight,
+    minHeight: safeHeight,
     width: "100%"
   };
   return (
     <div className={classes.root}>
-      <ButtonBase
-        component={Grid}
-        container
-        justify="center"
-        alignItems="center"
-        direction="column"
-        spacing={16}
-        disableRipple
-        className={classes.image}
-        focusVisibleClassName={classes.focusVisible}
-        style={style}
-      >
-        <span
-          className={classes.imageSrc}
-          style={{
-            backgroundImage: `url(${safeBackground})`
-          }}
+      <Card style={style}>
+        <CardHeader
+          avatar={<RenderAvatar {...props} />}
+          title={safeTitle}
+          subheader={safeContent}
         />
-        <span className={classes.imageBackdrop} />
-        <span>
-          <RenderAvatar {...props} />
-          <Rendertitle {...props} />
-          <Rendercontent {...props} />
-          <Renderlink {...props} />
-        </span>
-      </ButtonBase>
+        <CardMedia
+          className={classes.media}
+          image={safeBackground}
+          title={safeTitle}
+        />
+        <Rendercontent {...props} />
+        <Renderlink {...props} />
+      </Card>
     </div>
   );
 }
