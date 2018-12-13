@@ -10,8 +10,15 @@ import Grid from "@material-ui/core/Grid";
 //recompose
 import compose from "recompose/compose";
 import shouldUpdate from "recompose/shouldUpdate";
+import branch from "recompose/branch";
+import renderComponent from "recompose/renderComponent";
+import renderNothing from "recompose/renderNothing";
 
 import propPath from "crocks/Maybe/propPath";
+import safe from "crocks/Maybe/safe";
+import isObject from "crocks/predicates/isObject";
+import and from "crocks/logic/and";
+import hasProp from "crocks/predicates/hasProp";
 
 import type { HOC } from "recompose";
 
@@ -22,6 +29,8 @@ import {
   getNumberC,
   getObject
 } from "@artispace/utils/lib/ADTS/state";
+
+import { doesPropExistC } from "@artispace/utils/lib/ADTS/pred";
 
 import formatWidth from "../utils/width";
 
@@ -105,10 +114,95 @@ type Props = {
   customtheme?: Object
 };
 
-type Optionalcomponent = React.Node | null;
+function Title(props) {
+  const { classes } = props;
+  const title: string = getStringC("title", "")(props);
+  return (
+    <Grid item>
+      <Typography
+        color="textPrimary"
+        variant="h4"
+        align="center"
+        className={classes.imageText}
+      >
+        {title}
+      </Typography>
+    </Grid>
+  );
+}
+
+const Rendertitle = branch(
+  doesPropExistC("title"),
+  renderComponent(Title),
+  renderNothing
+)(<div />);
+
+function Content(props) {
+  const { classes } = props;
+  const content = getStringC("content")(props);
+  return (
+    <Grid item>
+      <Typography
+        color="textPrimary"
+        align="center"
+        className={classes.imageText}
+      >
+        {content}
+      </Typography>
+    </Grid>
+  );
+}
+
+const Rendercontent = branch(
+  doesPropExistC("content"),
+  renderComponent(Content),
+  renderNothing
+)(<div />);
+
+function Avatarcomponent(props) {
+  const safeAlt: string = getStringC("title", "")(props);
+
+  const { classes, avatar } = props;
+
+  return (
+    <Grid item>
+      <Avatar
+        alt={safeAlt}
+        style={{
+          width: getNumberC("size", 100)(avatar),
+          height: getNumberC("size", 100)(avatar)
+        }}
+        src={avatar.src}
+        className={classes.avatar}
+      />
+    </Grid>
+  );
+}
+
+const isAvatarAnObject = and(hasProp("avatar"), isObject);
+
+const RenderAvatar = branch(
+  isAvatarAnObject,
+  renderComponent(Avatarcomponent),
+  renderNothing
+)(<div />);
+
+function Linkcomponent(props) {
+  const { link, LinkButton } = props;
+  return (
+    <LinkButton variant="contained" {...{ link }} {...link} nobackground />
+  );
+}
+
+const isLinkAnObject = and(hasProp("link"), isObject);
+const Renderlink = branch(
+  isLinkAnObject,
+  renderComponent(Linkcomponent),
+  renderNothing
+)(<div />);
 
 function CenteredCard(props: Props) {
-  const { classes, width, LinkButton } = props;
+  const { classes, width } = props;
   const safeHeight = getObject("height", {})
     .map(height => {
       return propPath(["height", formatWidth(width)], props).option(250);
@@ -117,54 +211,7 @@ function CenteredCard(props: Props) {
   // const safeBackground = safe(isString, background).option("");
   const safeBackground: string = getStringC("background", "")(props);
   // const titleContent = safe(isString, title);
-  const titleContent: Object = getString("title", null);
-  const safeTitle = titleContent
-    .map(title =>
-      Boolean(title) ? (
-        <Typography
-          color="textPrimary"
-          variant="h4"
-          className={classes.imageText}
-        >
-          {title}
-        </Typography>
-      ) : null
-    )
-    .evalWith(props);
-  const safeAlt: string = getStringC("title", "")(props);
-  const safeContent: Optionalcomponent = getString("content", null)
-    .map(content =>
-      Boolean(content) ? (
-        <Typography color="textPrimary" className={classes.imageText}>
-          {content}
-        </Typography>
-      ) : null
-    )
-    .evalWith(props);
 
-  const safeAvatar: Optionalcomponent = getObject("avatar", null)
-    .map(avatar =>
-      Boolean(avatar) ? (
-        <Avatar
-          alt={safeAlt}
-          style={{
-            width: getNumberC("size", 100)(avatar),
-            height: getNumberC("size", 100)(avatar)
-          }}
-          src={avatar.src}
-          className={classes.avatar}
-        />
-      ) : null
-    )
-    .evalWith(props);
-
-  const safeLink: Optionalcomponent = getObject("link", null)
-    .map(link =>
-      Boolean(link) ? (
-        <LinkButton variant="contained" {...{ link }} {...link} nobackground />
-      ) : null
-    )
-    .evalWith(props);
   const style = {
     height: safeHeight,
     width: "100%"
@@ -177,7 +224,7 @@ function CenteredCard(props: Props) {
         justify="center"
         alignItems="center"
         direction="column"
-        spacing={8}
+        spacing={16}
         disableRipple
         className={classes.image}
         focusVisibleClassName={classes.focusVisible}
@@ -190,11 +237,11 @@ function CenteredCard(props: Props) {
           }}
         />
         <span className={classes.imageBackdrop} />
-        <span className={classes.imageButton}>
-          <Grid item>{safeAvatar}</Grid>
-          <Grid item>{safeTitle}</Grid>
-          <Grid item>{safeContent}</Grid>
-          <Grid item>{safeLink}</Grid>
+        <span>
+          <RenderAvatar {...props} />
+          <Rendertitle {...props} />
+          <Rendercontent {...props} />
+          <Renderlink {...props} />
         </span>
       </ButtonBase>
     </div>
