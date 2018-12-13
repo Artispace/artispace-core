@@ -15,7 +15,6 @@ import renderComponent from "recompose/renderComponent";
 import renderNothing from "recompose/renderNothing";
 
 import propPath from "crocks/Maybe/propPath";
-import safe from "crocks/Maybe/safe";
 import isObject from "crocks/predicates/isObject";
 import and from "crocks/logic/and";
 import hasProp from "crocks/predicates/hasProp";
@@ -24,7 +23,6 @@ import type { HOC } from "recompose";
 
 // utils
 import {
-  getString,
   getStringC,
   getNumberC,
   getObject
